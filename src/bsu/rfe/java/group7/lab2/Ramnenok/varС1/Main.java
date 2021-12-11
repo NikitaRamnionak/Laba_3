@@ -205,6 +205,21 @@ public class Main extends JFrame {
                 getContentPane().validate();
             }
         });
+
+        Box hboxButtons = Box.createHorizontalBox();
+        hboxButtons.setBorder(BorderFactory.createBevelBorder(1));
+        hboxButtons.add(Box.createHorizontalGlue());
+        hboxButtons.add(buttonCalc);
+        hboxButtons.add(Box.createHorizontalStrut(30));
+        hboxButtons.add(buttonReset);
+        hboxButtons.add(Box.createHorizontalGlue());
+
+        hboxButtons.setPreferredSize(new Dimension(new Double(hboxButtons.getMaximumSize().getWidth()).intValue(),
+                new Double(hboxButtons.getMinimumSize().getHeight()).intValue() * 2));
+        getContentPane().add(hboxButtons, BorderLayout.NORTH);
+        hBoxResult = Box.createHorizontalBox();
+        hBoxResult.add(new JPanel());
+        getContentPane().add(hBoxResult, BorderLayout.CENTER);
     }
     protected void saveToGraphicsFile(File selectedFile) {
         try {
