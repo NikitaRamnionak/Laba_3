@@ -46,6 +46,16 @@ public class GornerTableCellRenderer implements TableCellRenderer
         return false;
     }
 
+    public GornerTableCellRenderer() {
+        formatter.setMaximumFractionDigits(5);
+        formatter.setGroupingUsed(false);
+        DecimalFormatSymbols dottedDouble = formatter.getDecimalFormatSymbols();
+        dottedDouble.setDecimalSeparator('.');
+        formatter.setDecimalFormatSymbols(dottedDouble);
+        panel.add(label);
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+    }
+
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
 // Преобразовать double в строку с помощью форматировщика
         String formattedType = formatter.format(value);
