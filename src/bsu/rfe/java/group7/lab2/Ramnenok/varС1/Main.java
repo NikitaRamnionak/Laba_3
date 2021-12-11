@@ -118,6 +118,37 @@ public class Main extends JFrame {
         };
         aboutProgram = referenceMenu.add(aboutProgramAction);
         aboutProgram.setEnabled(true);
+
+        JLabel labelForFrom = new JLabel("X изменяется на интервале от:");
+        textFieldFrom = new JTextField("0.0", 10);
+        textFieldFrom.setMaximumSize(textFieldFrom.getPreferredSize());
+        JLabel labelForTo = new JLabel("до:");
+        textFieldTo = new JTextField("1.0", 10);
+        textFieldTo.setMaximumSize(textFieldTo.getPreferredSize());
+        JLabel labelForStep = new JLabel("с шагом:");
+        textFieldStep = new JTextField("0.1", 10);
+        textFieldStep.setMaximumSize(textFieldStep.getPreferredSize());
+
+        Box hboxRange = Box.createHorizontalBox();
+        hboxRange.setBorder(BorderFactory.createBevelBorder(1));
+        hboxRange.add(Box.createHorizontalGlue());
+        hboxRange.add(labelForFrom);
+        hboxRange.add(Box.createHorizontalStrut(10));
+        hboxRange.add(textFieldFrom);
+        hboxRange.add(Box.createHorizontalStrut(20));
+        hboxRange.add(labelForTo);
+        hboxRange.add(Box.createHorizontalStrut(10));
+        hboxRange.add(textFieldTo);
+        hboxRange.add(Box.createHorizontalStrut(20));
+        hboxRange.add(labelForStep);
+        hboxRange.add(Box.createHorizontalStrut(10));
+        hboxRange.add(textFieldStep);
+        hboxRange.add(Box.createHorizontalGlue());
+
+
+        hboxRange.setPreferredSize(new Dimension(new Double(hboxRange.getMaximumSize().getWidth()).intValue(),
+                new Double(hboxRange.getMinimumSize().getHeight()).intValue() * 2));
+        getContentPane().add(hboxRange, BorderLayout.SOUTH);
     }
     protected void saveToGraphicsFile(File selectedFile) {
         try {
