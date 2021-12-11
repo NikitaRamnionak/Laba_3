@@ -87,6 +87,36 @@ public class Main extends JFrame {
         };
         saveToTextMenuItem = fileMenu.add(saveToTextAction);
         saveToTextMenuItem.setEnabled(false);
+
+        Action saveToGraphicsAction = new AbstractAction("Сохранить данные для построения графика") {
+            public void actionPerformed(ActionEvent event) {
+                if (fileChooser == null) {
+                    fileChooser = new JFileChooser();
+                    fileChooser.setCurrentDirectory(new File("."));
+                }
+                if (fileChooser.showSaveDialog(Main.this) == JFileChooser.APPROVE_OPTION) ;
+                saveToGraphicsFile(fileChooser.getSelectedFile());
+            }
+        };
+        saveToGraphicsMenuItem = fileMenu.add(saveToGraphicsAction);
+        saveToGraphicsMenuItem.setEnabled(false);
+    }
+    protected void saveToGraphicsFile(File selectedFile) {
+        try {
+// Создать новый байтовый поток вывода, направленный в указанный файл
+            DataOutputStream out = new DataOutputStream(new
+                    FileOutputStream(selectedFile));
+// Записать в поток вывода попарно значение X в точке, значение многочлена в точке
+            for (int i = 0; i < data.getRowCount(); i++) {
+                out.writeDouble((Double) data.getValueAt(i, 0));
+                out.writeDouble((Double) data.getValueAt(i, 1));
+            }
+// Закрыть поток вывода
+            out.close();
+        } catch (Exception e) {
+// Исключительную ситуацию "ФайлНеНайден" в данном случае можно не обрабатывать,
+// так как мы файл создаѐм, а не открываем для чтения
+        }
     }
     protected void saveToTextFile(File selectedFile) {
         try {
