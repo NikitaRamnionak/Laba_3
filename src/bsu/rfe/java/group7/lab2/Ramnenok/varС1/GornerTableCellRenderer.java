@@ -15,4 +15,8 @@ public class GornerTableCellRenderer implements TableCellRenderer
 {
     private JPanel panel = new JPanel();
     private JLabel label = new JLabel();
+
+    private String needle = null;
+    private DecimalFormat formatter = (DecimalFormat)NumberFormat.getInstance();
+
 }
