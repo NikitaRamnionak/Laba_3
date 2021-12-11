@@ -110,6 +110,14 @@ public class Main extends JFrame {
         };
         searchValueMenuItem = tableMenu.add(searchValueAction);
         searchValueMenuItem.setEnabled(false);
+
+        Action aboutProgramAction = new AbstractAction("О программе") {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(Main.this, "Рамнёнок Никита 7 группа");
+            }
+        };
+        aboutProgram = referenceMenu.add(aboutProgramAction);
+        aboutProgram.setEnabled(true);
     }
     protected void saveToGraphicsFile(File selectedFile) {
         try {
