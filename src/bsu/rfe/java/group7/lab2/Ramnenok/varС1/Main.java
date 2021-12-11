@@ -59,7 +59,22 @@ public class Main extends JFrame {
     // Модель данных с результатами вычислений
     private GornerTableModel data;
 
+    public Main(Double[] coefficients) {
+        super("Табулирование многочлена на отрезке по схеме Горнера");
+        this.coefficients = coefficients;
+        setSize(WIDTH, HEIGHT);
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        setLocation((kit.getScreenSize().width - WIDTH) / 2, (kit.getScreenSize().height - HEIGHT) / 2);
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu fileMenu = new JMenu("Файл");
+        menuBar.add(fileMenu);
+        JMenu tableMenu = new JMenu("Таблица");
+        menuBar.add(tableMenu);
+        JMenu referenceMenu = new JMenu("Справка");
+        menuBar.add(referenceMenu);
+    }
     public static void main(String[] args) {
-	// write your code here
     }
 }
