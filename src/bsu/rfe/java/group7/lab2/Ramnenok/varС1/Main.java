@@ -149,6 +149,62 @@ public class Main extends JFrame {
         hboxRange.setPreferredSize(new Dimension(new Double(hboxRange.getMaximumSize().getWidth()).intValue(),
                 new Double(hboxRange.getMinimumSize().getHeight()).intValue() * 2));
         getContentPane().add(hboxRange, BorderLayout.SOUTH);
+
+        // Создать кнопку "Вычислить"
+        JButton buttonCalc = new JButton("Вычислить");
+        buttonCalc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                try {
+// Считать значения начала и конца отрезка, шага
+                    Double from = Double.parseDouble(textFieldFrom.getText());
+                    Double to = Double.parseDouble(textFieldTo.getText());
+                    Double step = Double.parseDouble(textFieldStep.getText());
+// На основе считанных данных создать новый экземпляр модели таблицы
+                    data = new GornerTableModel(from, to, step, Main.this.coefficients);
+// Создать новый экземпляр таблицы
+                    JTable table = new JTable(data);
+// Установить в качестве визуализатора ячеек для класса Double разработанный визуализатор
+                    table.setDefaultRenderer(Double.class, renderer);
+// Установить размер строки таблицы в 30 пикселов
+                    table.setRowHeight(30);
+// Удалить все вложенные элементы из контейнера hBoxResult
+                    hBoxResult.removeAll();
+// Добавить в hBoxResult таблицу, "обѐрнутую" в панель с полосами прокрутки
+                    hBoxResult.add(new JScrollPane(table));
+// Обновить область содержания главного окна
+                    getContentPane().validate();
+// Пометить ряд элементов меню как доступных
+                    saveToTextMenuItem.setEnabled(true);
+                    saveToGraphicsMenuItem.setEnabled(true);
+                    searchValueMenuItem.setEnabled(true);
+                } catch (NumberFormatException ex) {
+// В случае ошибки преобразования чисел показать сообщение об ошибке
+                    JOptionPane.showMessageDialog(Main.this,
+                            "Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+// Создать кнопку "Очистить поля"
+        JButton buttonReset = new JButton("Очистить поля");
+        buttonReset.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+// Установить в полях ввода значения по умолчанию
+                textFieldFrom.setText("0.0");
+                textFieldTo.setText("1.0");
+                textFieldStep.setText("0.1");
+// Удалить все вложенные элементы контейнера hBoxResult
+                hBoxResult.removeAll();
+// Добавить в контейнер пустую панель
+                hBoxResult.add(new JPanel());
+// Пометить элементы меню как недоступные
+                saveToTextMenuItem.setEnabled(false);
+                saveToGraphicsMenuItem.setEnabled(false);
+                searchValueMenuItem.setEnabled(false);
+// Обновить область содержания главного окна
+                getContentPane().validate();
+            }
+        });
     }
     protected void saveToGraphicsFile(File selectedFile) {
         try {
